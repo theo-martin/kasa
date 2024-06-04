@@ -1,0 +1,25 @@
+* {
+  margin: 0;
+  padding: 0;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+* {
+  font-family: Roboto;
+}
+
+footer {
+  background-color: black;
+  color: white;
+}
+
+.logements__card__img {
+  height: 225px;
+  width: 325px;
+}
+
+/*# sourceMappingURL=style.css.map */
