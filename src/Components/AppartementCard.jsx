@@ -8,14 +8,14 @@ function AppartementCard({ logement }) {
 
   return (
     <Link to={`/logement/${logement.id}`} className="logements__card">
-      <img
-        className="logements__card__img"
-        src={logement.cover}
-        alt={logement.title}
-      />
-      <figcaption className="logements__card__Figcaption">
-        <h2 className="logements__card__Figcaption__h2">{logement.title}</h2>
-      </figcaption>
+      <article className="logements__card__article">
+        <img
+          className="logements__card__article__img"
+          src={logement.cover}
+          alt={logement.title}
+        />
+        <h2 className="logements__card__article__h2">{logement.title}</h2>
+      </article>
     </Link>
   );
 }

@@ -1,0 +1,21 @@
+.Header {
+  margin: 20px;
+  display: flex;
+  justify-content: space-between;
+  img {
+    width: 145px;
+  }
+
+  nav {
+    display: flex;
+    align-items: center;
+    ul {
+      gap: 20px;
+      display: flex;
+      li {
+        font-size: 12px;
+        list-style: none;
+      }
+    }
+  }
+}

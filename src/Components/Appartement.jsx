@@ -1,41 +1,97 @@
-import React, { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import React, { useState, useEffect } from "react";
+import { useParams, Link } from "react-router-dom";
+import Header from "./Header";
 
 function Appartement() {
-  const { id } = useParams(); // Récupérer l'ID depuis l'URL
+  const { id } = useParams();
   const [logement, setLogement] = useState(null);
+  const [isLoading, setIsLoading] = useState(true);
+  const [error, setError] = useState(null);
+  const [currentSlide, setCurrentSlide] = useState(0);
 
   useEffect(() => {
-    fetch("/logements.json")
-      .then((response) => response.json())
-      .then((data) => {
-        // Trouver le logement correspondant à l'ID
+    const fetchLogement = async () => {
+      try {
+        const response = await fetch("/logements.json");
+        const data = await response.json();
         const logementTrouve = data.find((l) => l.id === id);
         setLogement(logementTrouve);
-      })
-      .catch((error) =>
-        console.error("Erreur lors du chargement du logement :", error)
-      );
-  }, [id]); // Recharger si l'ID change
+      } catch (err) {
+        setError(err);
+        console.error("Erreur lors du chargement du logement :", err);
+      } finally {
+        setIsLoading(false);
+      }
+    };
+
+    fetchLogement();
+  }, [id]);
+
+  const nextSlide = () => {
+    setCurrentSlide((prevSlide) =>
+      prevSlide === logement?.pictures.length - 1 ? 0 : prevSlide + 1
+    );
+  };
+
+  const prevSlide = () => {
+    setCurrentSlide((prevSlide) =>
+      prevSlide === 0 ? logement?.pictures.length - 1 : prevSlide - 1
+    );
+  };
+
+  useEffect(() => {
+    if (logement) {
+      // Démarrer le défilement automatique uniquement si le logement est chargé
+      const interval = setInterval(nextSlide, 10000);
+      return () => clearInterval(interval);
+    }
+  }, [logement, nextSlide]); // Ajouter nextSlide comme dépendance
+
+  if (isLoading) {
+    return <div>Chargement en cours...</div>;
+  }
+
+  if (error) {
+    return <div>Erreur : {error.message}</div>;
+  }
 
   if (!logement) {
-    return <div>Chargement en cours...</div>; // Afficher un message de chargement
+    return <div>Logement non trouvé.</div>;
   }
 
   return (
-    <div className="appartement-container">
-      <h1>{logement.title}</h1>
-      <div className="images-gallery">
-        {logement.pictures.map((picture, index) => (
-          <img
-            key={index}
-            src={picture}
-            alt={`${logement.title} - ${index + 1}`}
-          />
-        ))}
-      </div>
-      <p>{logement.description}</p>
-      {/* ... afficher les autres détails (équipements, localisation, hôte, etc.) */}
+    <div className="page-appartement">
+      <Header />
+      <section className="appartement">
+        <h1 className="appartement__h1">{logement.title}</h1>
+
+        {/* Slider (uniquement si logement.pictures existe) */}
+        {logement.pictures && (
+          <div className="appartement__slider">
+            <img
+              src={logement.pictures[currentSlide]}
+              alt={`${logement.title} - ${currentSlide + 1}`}
+              className="appartement__slider__image"
+            />
+            <div className="appartement__slider__arrow">
+              <button
+                onClick={prevSlide}
+                className="appartement__slider__arrow__left"
+              >
+                ←
+              </button>
+              <button
+                onClick={nextSlide}
+                className="appartement__slider__arrow__right"
+              >
+                →
+              </button>
+            </div>
+          </div>
+        )}
+
+        <p className="appartement__p">{logement.description}</p>
+      </section>
     </div>
   );
 }

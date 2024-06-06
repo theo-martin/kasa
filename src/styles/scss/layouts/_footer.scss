@@ -1,4 +1,18 @@
 footer {
+  display: flex;
+  flex-direction: column;
   background-color: black;
+  height: 209px;
   color: white;
+  align-items: center;
+  justify-content: center;
+  gap: 15px;
+  img {
+    height: 40px;
+    width: 122px;
+  }
+  p {
+    width: 122px;
+    text-align: center;
+  }
 }
