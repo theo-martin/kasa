@@ -1,12 +1,65 @@
 .appartement {
   display: flex;
   flex-direction: column;
+  align-items: center;
   margin: 27px 20px 27px 20px;
   &__slider {
+    position: relative;
+    width: fit-content;
     &__image {
+      border-radius: 10px;
       width: 335px;
       height: 255px;
       object-fit: cover;
     }
+    &__arrow-left {
+      position: absolute;
+      top: 100px;
+      left: 30px;
+    }
+    &__arrow-right {
+      position: absolute;
+      top: 100px;
+      right: 30px;
+    }
+  }
+  .collapse {
+    &__button {
+      border: none;
+      border-radius: 10px;
+      background-color: #ff6060;
+    }
+    &__content {
+      background-color: #f6f6f6;
+      overflow: hidden;
+      max-height: 0; /* Initialement replié */
+      transition: max-height 0.3s ease-in-out;
+    }
+    &__content-animation {
+      max-height: 800px; /* Ou une valeur suffisamment grande pour votre contenu */
+    }
+    &__arrow-down {
+      transform: rotate(180deg);
+    }
+  }
+}
+.tags-list {
+  display: flex;
+  flex-direction: row;
+  gap: 20px;
+  list-style-type: none;
+}
+.tag-item {
+  width: fit-content;
+  padding: 5px;
+  background-color: #ff6060;
+  border-radius: 10px;
+}
+.profil {
+  display: flex;
+  gap: 10px;
+  &__img {
+    border-radius: 90px;
+    height: 32px;
   }
 }

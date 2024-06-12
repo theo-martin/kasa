@@ -1,3 +1,4 @@
+@charset "UTF-8";
 * {
   margin: 0;
   padding: 0;
@@ -59,19 +60,46 @@ main {
   margin: 0 20px 20px 20px;
 }
 
-.Banniere {
+.banner {
+  position: relative;
   height: 111px;
-  width: 335px;
-  display: flex;
-  background: round;
-  justify-content: center;
-  align-items: center;
-  filter: brightness(0.5);
-  border-radius: 10px;
-  background-image: url("../../Images/Banniere1.png");
+  width: 100%;
+  margin-top: 50px;
+  border-radius: 25px;
+  overflow: hidden;
 }
-.Banniere h1 {
-  color: white;
+.banner::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  z-index: 0;
+  background-color: #000;
+  opacity: 0.4;
+}
+.banner__img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.banner__title {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  z-index: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0;
+  padding: 16px;
+  color: #fff;
+  font-size: 37px;
+  font-style: normal;
+  line-height: 44px;
 }
 
 .logements {
@@ -102,12 +130,68 @@ main {
 .appartement {
   display: flex;
   flex-direction: column;
+  align-items: center;
   margin: 27px 20px 27px 20px;
 }
+.appartement__slider {
+  position: relative;
+  width: fit-content;
+}
 .appartement__slider__image {
+  border-radius: 10px;
   width: 335px;
   height: 255px;
   object-fit: cover;
+}
+.appartement__slider__arrow-left {
+  position: absolute;
+  top: 100px;
+  left: 30px;
+}
+.appartement__slider__arrow-right {
+  position: absolute;
+  top: 100px;
+  right: 30px;
+}
+.appartement .collapse__button {
+  border: none;
+  border-radius: 10px;
+  background-color: #ff6060;
+}
+.appartement .collapse__content {
+  background-color: #f6f6f6;
+  overflow: hidden;
+  max-height: 0; /* Initialement replié */
+  transition: max-height 0.3s ease-in-out;
+}
+.appartement .collapse__content-animation {
+  max-height: 800px; /* Ou une valeur suffisamment grande pour votre contenu */
+}
+.appartement .collapse__arrow-down {
+  transform: rotate(180deg);
+}
+
+.tags-list {
+  display: flex;
+  flex-direction: row;
+  gap: 20px;
+  list-style-type: none;
+}
+
+.tag-item {
+  width: fit-content;
+  padding: 5px;
+  background-color: #ff6060;
+  border-radius: 10px;
+}
+
+.profil {
+  display: flex;
+  gap: 10px;
+}
+.profil__img {
+  border-radius: 90px;
+  height: 32px;
 }
 
 /*# sourceMappingURL=style.css.map */

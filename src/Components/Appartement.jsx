@@ -1,6 +1,8 @@
-import React, { useState, useEffect } from "react";
-import { useParams, Link } from "react-router-dom";
+import React, { useState, useEffect, useRef, useCallback } from "react";
+import { useParams } from "react-router-dom";
 import Header from "./Header";
+import Footer from "./Footer";
+import arrow from "../Images/arrow.png";
 
 function Appartement() {
   const { id } = useParams();
@@ -8,6 +10,19 @@ function Appartement() {
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState(null);
   const [currentSlide, setCurrentSlide] = useState(0);
+
+  const [isDescriptionOpen, setIsDescriptionOpen] = useState(false);
+  const [isEquipmentsOpen, setIsEquipmentsOpen] = useState(false);
+
+  // Fonctions pour gérer les clics
+  const toggleDescription = () => {
+    setIsDescriptionOpen(!isDescriptionOpen);
+  };
+
+  const toggleEquipments = () => {
+    setIsEquipmentsOpen(!isEquipmentsOpen);
+  };
+  const contentRef = useRef(null); // reférence au contenu pour accéder a sa hauteur
 
   useEffect(() => {
     const fetchLogement = async () => {
@@ -27,12 +42,16 @@ function Appartement() {
     fetchLogement();
   }, [id]);
 
-  const nextSlide = () => {
+  // const nextSlide = () => {
+  //   setCurrentSlide((prevSlide) =>
+  //     prevSlide === logement?.pictures.length - 1 ? 0 : prevSlide + 1
+  //   );
+  // };
+  const nextSlide = useCallback(() => {
     setCurrentSlide((prevSlide) =>
       prevSlide === logement?.pictures.length - 1 ? 0 : prevSlide + 1
     );
-  };
-
+  }, [logement?.pictures.length]);
   const prevSlide = () => {
     setCurrentSlide((prevSlide) =>
       prevSlide === 0 ? logement?.pictures.length - 1 : prevSlide - 1
@@ -45,7 +64,7 @@ function Appartement() {
       const interval = setInterval(nextSlide, 10000);
       return () => clearInterval(interval);
     }
-  }, [logement, nextSlide]); // Ajouter nextSlide comme dépendance
+  }, [logement, nextSlide]);
 
   if (isLoading) {
     return <div>Chargement en cours...</div>;
@@ -63,8 +82,6 @@ function Appartement() {
     <div className="page-appartement">
       <Header />
       <section className="appartement">
-        <h1 className="appartement__h1">{logement.title}</h1>
-
         {/* Slider (uniquement si logement.pictures existe) */}
         {logement.pictures && (
           <div className="appartement__slider">
@@ -73,25 +90,102 @@ function Appartement() {
               alt={`${logement.title} - ${currentSlide + 1}`}
               className="appartement__slider__image"
             />
-            <div className="appartement__slider__arrow">
-              <button
-                onClick={prevSlide}
-                className="appartement__slider__arrow__left"
-              >
-                ←
-              </button>
-              <button
-                onClick={nextSlide}
-                className="appartement__slider__arrow__right"
-              >
-                →
-              </button>
-            </div>
+
+            <button
+              onClick={prevSlide}
+              className="appartement__slider__arrow-left"
+            >
+              ←
+            </button>
+            <button
+              onClick={nextSlide}
+              className="appartement__slider__arrow-right"
+            >
+              →
+            </button>
           </div>
         )}
+        <div className="collapse">
+          <div className="collapse">
+            <h2 className="collapse__title">{logement.title}</h2>
+            <h3>{logement.location}</h3>
+            <ul className="tags-list">
+              {logement.tags.map((tag, index) => (
+                <li key={index} className="tag-item">
+                  {tag}
+                </li>
+              ))}
+            </ul>
+            <div className="profil">
+              <div className="profil__name">
+                {logement.host.name.split(" ").map((part, index) => (
+                  <p className="profil__name__p" key={index}>
+                    {part}
+                  </p>
+                ))}
+              </div>
+              <img
+                src={logement.host.picture}
+                className="profil__img"
+                alt={logement.host.name}
+              />
+            </div>
 
-        <p className="appartement__p">{logement.description}</p>
+            <button className="collapse__button" onClick={toggleDescription}>
+              <img
+                className={
+                  isDescriptionOpen
+                    ? "collapse__arrow collapse__arrow-down"
+                    : "collapse__arrow collapse__arrow-up"
+                }
+                src={arrow}
+                alt="Arrow"
+              />
+              Description
+              <p
+                ref={contentRef}
+                className={
+                  isDescriptionOpen
+                    ? "collapse__content collapse__content-animation"
+                    : "collapse__content"
+                }
+              >
+                {logement.description}
+                {logement.children}
+              </p>
+            </button>
+            <button className="collapse__button" onClick={toggleEquipments}>
+              <img
+                className={
+                  isEquipmentsOpen
+                    ? "collapse__arrow collapse__arrow-down"
+                    : "collapse__arrow collapse__arrow-up"
+                }
+                src={arrow}
+                alt="Arrow"
+              />
+              Equipments
+              <ul
+                ref={contentRef}
+                className={
+                  isEquipmentsOpen
+                    ? "collapse__content collapse__content-animation"
+                    : "collapse__content"
+                }
+              >
+                {logement.equipments.map((equipment, index) => (
+                  <li key={index} className="equipments-item">
+                    {equipment}
+                  </li>
+                ))}
+                {/* {logement.equipments} */}
+                {/* {logement.children} */}
+              </ul>
+            </button>
+          </div>
+        </div>
       </section>
+      <Footer />
     </div>
   );
 }
