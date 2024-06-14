@@ -143,15 +143,27 @@ main {
   height: 255px;
   object-fit: cover;
 }
+.appartement__slider__arrow {
+  background-color: transparent;
+  border: none;
+}
 .appartement__slider__arrow-left {
   position: absolute;
   top: 100px;
   left: 30px;
 }
+.appartement__slider__arrow-left__left {
+  height: 20px;
+  transform: rotate(270deg);
+}
 .appartement__slider__arrow-right {
   position: absolute;
   top: 100px;
   right: 30px;
+}
+.appartement__slider__arrow-right__right {
+  height: 20px;
+  transform: rotate(90deg);
 }
 .appartement .collapse__button {
   border: none;

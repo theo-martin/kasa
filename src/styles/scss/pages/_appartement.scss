@@ -12,15 +12,27 @@
       height: 255px;
       object-fit: cover;
     }
+    &__arrow {
+      background-color: transparent;
+      border: none;
+    }
     &__arrow-left {
       position: absolute;
       top: 100px;
       left: 30px;
+      &__left {
+        height: 20px;
+        transform: rotate(270deg);
+      }
     }
     &__arrow-right {
       position: absolute;
       top: 100px;
       right: 30px;
+      &__right {
+        height: 20px;
+        transform: rotate(90deg);
+      }
     }
   }
   .collapse {

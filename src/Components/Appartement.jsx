@@ -3,6 +3,8 @@ import { useParams } from "react-router-dom";
 import Header from "./Header";
 import Footer from "./Footer";
 import arrow from "../Images/arrow.png";
+import starFull from "../Images/starFull.png";
+import starEmpty from "../Images/starEmpty.png";
 
 function Appartement() {
   const { id } = useParams();
@@ -10,7 +12,7 @@ function Appartement() {
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState(null);
   const [currentSlide, setCurrentSlide] = useState(0);
-
+  const stars = [1, 2, 3, 4, 5];
   const [isDescriptionOpen, setIsDescriptionOpen] = useState(false);
   const [isEquipmentsOpen, setIsEquipmentsOpen] = useState(false);
 
@@ -42,11 +44,6 @@ function Appartement() {
     fetchLogement();
   }, [id]);
 
-  // const nextSlide = () => {
-  //   setCurrentSlide((prevSlide) =>
-  //     prevSlide === logement?.pictures.length - 1 ? 0 : prevSlide + 1
-  //   );
-  // };
   const nextSlide = useCallback(() => {
     setCurrentSlide((prevSlide) =>
       prevSlide === logement?.pictures.length - 1 ? 0 : prevSlide + 1
@@ -93,15 +90,23 @@ function Appartement() {
 
             <button
               onClick={prevSlide}
-              className="appartement__slider__arrow-left"
+              className="appartement__slider__arrow-left appartement__slider__arrow"
             >
-              ←
+              <img
+                className="appartement__slider__arrow-left__left"
+                src={arrow}
+                alt="Arrow"
+              />
             </button>
             <button
               onClick={nextSlide}
-              className="appartement__slider__arrow-right"
+              className="appartement__slider__arrow-right appartement__slider__arrow"
             >
-              →
+              <img
+                className="appartement__slider__arrow-right__right"
+                src={arrow}
+                alt="Arrow"
+              />
             </button>
           </div>
         )}
@@ -117,6 +122,28 @@ function Appartement() {
               ))}
             </ul>
             <div className="profil">
+              <div className="rate">
+                {/* Genere les etoiles en fonction de la note */}
+                {stars.map((star) =>
+                  logement.rate >= star ? (
+                    // Affiche une etoile pleine si la note est superieur ou egal a l'index de l'etoile
+                    <img
+                      key={star}
+                      className="rate__star"
+                      src={starFull}
+                      alt="Étoile pleine, 1 point"
+                    />
+                  ) : (
+                    // Sinon, affiche une etoile vide
+                    <img
+                      key={star}
+                      className="rate__star"
+                      src={starEmpty}
+                      alt="Étoile vide, 0 point"
+                    />
+                  )
+                )}
+              </div>
               <div className="profil__name">
                 {logement.host.name.split(" ").map((part, index) => (
                   <p className="profil__name__p" key={index}>
