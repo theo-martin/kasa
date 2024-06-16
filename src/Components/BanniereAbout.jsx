@@ -1,6 +1,6 @@
-import bg from "../Images/Banniere1.png";
+import bg from "../Images/Banniere2.png";
 
-function Banniere() {
+function BanniereAbout() {
   return (
     <section className="banner">
       <img className="banner__img" src={bg} alt="Banner" />
@@ -8,4 +8,4 @@ function Banniere() {
     </section>
   );
 }
-export default Banniere;
+export default BanniereAbout;

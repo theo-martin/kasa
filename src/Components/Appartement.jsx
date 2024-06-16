@@ -1,30 +1,17 @@
-import React, { useState, useEffect, useRef, useCallback } from "react";
+import React, { useState, useEffect, useCallback } from "react";
 import { useParams } from "react-router-dom";
 import Header from "./Header";
 import Footer from "./Footer";
 import arrow from "../Images/arrow.png";
-import starFull from "../Images/starFull.png";
-import starEmpty from "../Images/starEmpty.png";
+import Rate from "./Rate";
 
+import Collapse from "./Collapse";
 function Appartement() {
   const { id } = useParams();
   const [logement, setLogement] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState(null);
   const [currentSlide, setCurrentSlide] = useState(0);
-  const stars = [1, 2, 3, 4, 5];
-  const [isDescriptionOpen, setIsDescriptionOpen] = useState(false);
-  const [isEquipmentsOpen, setIsEquipmentsOpen] = useState(false);
-
-  // Fonctions pour gérer les clics
-  const toggleDescription = () => {
-    setIsDescriptionOpen(!isDescriptionOpen);
-  };
-
-  const toggleEquipments = () => {
-    setIsEquipmentsOpen(!isEquipmentsOpen);
-  };
-  const contentRef = useRef(null); // reférence au contenu pour accéder a sa hauteur
 
   useEffect(() => {
     const fetchLogement = async () => {
@@ -110,106 +97,47 @@ function Appartement() {
             </button>
           </div>
         )}
-        <div className="collapse">
-          <div className="collapse">
-            <h2 className="collapse__title">{logement.title}</h2>
-            <h3>{logement.location}</h3>
-            <ul className="tags-list">
-              {logement.tags.map((tag, index) => (
-                <li key={index} className="tag-item">
-                  {tag}
-                </li>
-              ))}
-            </ul>
-            <div className="profil">
-              <div className="rate">
-                {/* Genere les etoiles en fonction de la note */}
-                {stars.map((star) =>
-                  logement.rate >= star ? (
-                    // Affiche une etoile pleine si la note est superieur ou egal a l'index de l'etoile
-                    <img
-                      key={star}
-                      className="rate__star"
-                      src={starFull}
-                      alt="Étoile pleine, 1 point"
-                    />
-                  ) : (
-                    // Sinon, affiche une etoile vide
-                    <img
-                      key={star}
-                      className="rate__star"
-                      src={starEmpty}
-                      alt="Étoile vide, 0 point"
-                    />
-                  )
-                )}
-              </div>
-              <div className="profil__name">
-                {logement.host.name.split(" ").map((part, index) => (
-                  <p className="profil__name__p" key={index}>
-                    {part}
-                  </p>
-                ))}
-              </div>
-              <img
-                src={logement.host.picture}
-                className="profil__img"
-                alt={logement.host.name}
-              />
+        <div className="appartement__content">
+          <h2 className="appartement__content__title">{logement.title}</h2>
+          <h3 className="appartement__content__location">
+            {logement.location}
+          </h3>
+          <ul className="appartement__content__tags-list">
+            {logement.tags.map((tag, index) => (
+              <li
+                key={index}
+                className="appartement__content__tags-list__tag-item"
+              >
+                {tag}
+              </li>
+            ))}
+          </ul>
+          <div className="profil">
+            <div className="profil__rate">
+              <Rate score={logement.rating} />
             </div>
-
-            <button className="collapse__button" onClick={toggleDescription}>
-              <img
-                className={
-                  isDescriptionOpen
-                    ? "collapse__arrow collapse__arrow-down"
-                    : "collapse__arrow collapse__arrow-up"
-                }
-                src={arrow}
-                alt="Arrow"
-              />
-              Description
-              <p
-                ref={contentRef}
-                className={
-                  isDescriptionOpen
-                    ? "collapse__content collapse__content-animation"
-                    : "collapse__content"
-                }
-              >
-                {logement.description}
-                {logement.children}
-              </p>
-            </button>
-            <button className="collapse__button" onClick={toggleEquipments}>
-              <img
-                className={
-                  isEquipmentsOpen
-                    ? "collapse__arrow collapse__arrow-down"
-                    : "collapse__arrow collapse__arrow-up"
-                }
-                src={arrow}
-                alt="Arrow"
-              />
-              Equipments
-              <ul
-                ref={contentRef}
-                className={
-                  isEquipmentsOpen
-                    ? "collapse__content collapse__content-animation"
-                    : "collapse__content"
-                }
-              >
-                {logement.equipments.map((equipment, index) => (
-                  <li key={index} className="equipments-item">
-                    {equipment}
-                  </li>
-                ))}
-                {/* {logement.equipments} */}
-                {/* {logement.children} */}
-              </ul>
-            </button>
+            <div className="profil__name">
+              {logement.host.name.split(" ").map((part, index) => (
+                <p className="profil__name__p" key={index}>
+                  {part}
+                </p>
+              ))}
+            </div>
+            <img
+              src={logement.host.picture}
+              className="profil__img"
+              alt={logement.host.name}
+            />
           </div>
+          <Collapse aboutTitle="Description" aboutText={logement.description} />
+          <Collapse
+            aboutTitle="Équipements"
+            aboutText={logement.equipments.map((equipment, index) => (
+              <li key={index} className="collapse__equipments-item">
+                {equipment}
+              </li>
+            ))}
+          />
         </div>
       </section>
       <Footer />

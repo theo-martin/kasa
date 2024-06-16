@@ -1,18 +1,21 @@
-import Footer from "../Components/Footer";
 import { Link } from "react-router-dom";
+import Footer from "../Components/Footer";
 import Header from "../Components/Header";
 import Image404 from "../Images/Image404.png";
 export default function Page404() {
   return (
     <>
       <Header />
-      <img className="Img-404" src={Image404} alt="404"></img>
-      <div className="Texte404">
-        Oups! La page que vous demandez n'existe pas.
+      <div className="Page404">
+        <img className="Page404__img" src={Image404} alt="404"></img>
+        <p className="Page404__p">
+          Oups! La page que vous demandez n'existe pas.
+        </p>
+        <Link to="/" className="Page404__link">
+          Retourner sur la page d'accueil
+        </Link>
       </div>
-      <Link to="" className="Link404">
-        Retourner sur la page d'accueil
-      </Link>
+
       <Footer />
     </>
   );
