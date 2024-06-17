@@ -1,0 +1,22 @@
+.collapse {
+  &__equipments-item {
+    list-style: none;
+  }
+  &__button {
+    border: none;
+    border-radius: 10px;
+    background-color: $background_titre_collapse;
+  }
+  &__content {
+    background-color: $background_text_collapse;
+    overflow: hidden;
+    max-height: 0; /* Initialement replié */
+    transition: max-height 0.3s ease-in-out;
+  }
+  &__content-animation {
+    max-height: 800px; /* Ou une valeur suffisamment grande pour votre contenu */
+  }
+  &__arrow-down {
+    transform: rotate(180deg);
+  }
+}

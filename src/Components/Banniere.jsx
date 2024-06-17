@@ -4,7 +4,9 @@ function Banniere() {
   return (
     <section className="banner">
       <img className="banner__img" src={bg} alt="Banner" />
-      <h1 className="banner__title">Chez vous, partout et ailleurs</h1>
+      <h1 className="banner__title">
+        <span>Chez vous,</span> <span>partout et ailleurs</span>
+      </h1>
     </section>
   );
 }
