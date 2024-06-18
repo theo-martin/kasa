@@ -3,6 +3,7 @@ import Footer from "../Components/Footer";
 import Header from "../Components/Header";
 import Banniere from "../Components/Banniere";
 import AppartementCard from "../Components/AppartementCard";
+import bg from "../Images/Banniere1.png";
 
 export default function Home() {
   const [logements, setLogements] = useState([]);
@@ -23,7 +24,13 @@ export default function Home() {
     <>
       <Header />
       <main>
-        <Banniere />
+        <Banniere
+          sectionbanner="banner"
+          classtitle="banner__title"
+          bannerText1="Chez vous,"
+          bannerText2="partout et ailleurs"
+          bg={bg}
+        />
         <section className="logements">
           {logements.length > 0 ? ( // Condition pour vérifier si logements est vide
             logements.map((logement) => (

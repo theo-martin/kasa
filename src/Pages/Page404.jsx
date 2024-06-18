@@ -9,7 +9,8 @@ export default function Page404() {
       <div className="Page404">
         <img className="Page404__img" src={Image404} alt="404"></img>
         <p className="Page404__p">
-          Oups! La page que vous demandez n'existe pas.
+          <span>Oups! La page que</span>
+          <span>vous demandez n'existe pas.</span>
         </p>
         <Link to="/" className="Page404__link">
           Retourner sur la page d'accueil

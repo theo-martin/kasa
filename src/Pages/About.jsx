@@ -1,15 +1,15 @@
 import Collapse from "../Components/Collapse";
 import Header from "../Components/Header";
 import Footer from "../Components/Footer";
-import BanniereAbout from "../Components/BanniereAbout";
-
+import Banniere from "../Components/Banniere";
+import bg from "../Images/Banniere2.png";
 export default function About() {
   return (
     <>
       <Header />
       <main className="main-About">
-        <BanniereAbout />
-        <section className="About-Collapse">
+        <Banniere sectionbanner="banner banner--opacity-about" bg={bg} />
+        <section className="collapse">
           <Collapse
             aboutTitle="Fiabilité"
             aboutText="Les annonces postées sur Kasa garantissent une fiabilité totale. Les photos sont conformes aux logements, et toutes les informations sont régulièrement vérifiées par nos équipes."

@@ -18,6 +18,11 @@
     background-color: #000;
     opacity: 0.6;
   }
+  &--opacity-about {
+    &::before {
+      opacity: 0.1;
+    }
+  }
 
   &__img {
     width: 100%;
@@ -40,7 +45,6 @@
     color: #fff;
     font-size: 24px;
     font-style: normal;
-    // line-height: 44px;
     font-weight: bold;
     flex-direction: column;
   }

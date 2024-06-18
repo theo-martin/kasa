@@ -1,13 +1,11 @@
-import bg from "../Images/Banniere1.png";
-
-function Banniere() {
+export default function Banniere(props) {
   return (
-    <section className="banner">
-      <img className="banner__img" src={bg} alt="Banner" />
-      <h1 className="banner__title">
-        <span>Chez vous,</span> <span>partout et ailleurs</span>
+    <section className={props.sectionbanner}>
+      <img className="banner__img" src={props.bg} alt="Banner" />
+      <h1 className={props.classtitle}>
+        <span className={props.className}>{props.bannerText1}</span>
+        <span className={props.bannerText1}>{props.bannerText2}</span>
       </h1>
     </section>
   );
 }
-export default Banniere;
