@@ -6,10 +6,10 @@
 
   &__slider {
     position: relative;
-    width: fit-content;
+    width: 100%;
     &__image {
       border-radius: 10px;
-      width: 335px;
+      width: 100%;
       height: 255px;
       object-fit: cover;
     }
@@ -23,7 +23,6 @@
       left: 30px;
       &__left {
         height: 20px;
-        transform: rotate(270deg);
       }
     }
     &__arrow-right {
@@ -32,52 +31,62 @@
       right: 30px;
       &__right {
         height: 20px;
-        transform: rotate(90deg);
+        transform: rotate(180deg);
       }
     }
   }
   &__content {
+    &__title {
+      color: $rouge-kasa;
+      font-weight: 500;
+      font-size: 18px;
+    }
+    &__location {
+      font-weight: 500;
+      font-size: 14px;
+      margin: 5px 0 10px 0;
+    }
     &__tags-list {
       display: flex;
       flex-direction: row;
-      gap: 20px;
+      gap: 10px;
       list-style-type: none;
       &__tag-item {
         width: fit-content;
         padding: 5px;
+        font-size: 10px;
+        color: white;
+        font-weight: bold;
         background-color: #ff6060;
-        border-radius: 10px;
+        border-radius: 5px;
       }
     }
   }
 }
-.collapse {
-  &__equipments-item {
-    list-style: none;
-  }
-  &__button {
-    border: none;
-    border-radius: 10px;
-    background-color: #ff6060;
-  }
-  &__content {
-    background-color: #f6f6f6;
-    overflow: hidden;
-    max-height: 0; /* Initialement replié */
-    transition: max-height 0.3s ease-in-out;
-  }
-  &__content-animation {
-    max-height: 800px; /* Ou une valeur suffisamment grande pour votre contenu */
-  }
-  &__arrow-down {
-    transform: rotate(180deg);
-  }
-}
 .profil {
   display: flex;
-  gap: 10px;
-  &__img {
-    border-radius: 90px;
-    height: 32px;
+  justify-content: space-between;
+  align-items: center;
+  &__rate {
+    display: flex;
+    gap: 5px;
+    // &__star {
+    //   height: 18px;
+    // }
+  }
+  &__content {
+    margin: 16px 0 12px 0;
+    gap: 10px;
+    display: flex;
+    align-items: center;
+    &__name {
+      font-weight: 500;
+      font-size: 12px;
+      color: $rouge-kasa;
+    }
+    &__img {
+      border-radius: 90px;
+      height: 32px;
+    }
   }
 }

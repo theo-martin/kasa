@@ -2,9 +2,9 @@ import React, { useState, useEffect, useCallback } from "react";
 import { useParams } from "react-router-dom";
 import Header from "./Header";
 import Footer from "./Footer";
-import arrow from "../Images/arrow.png";
+// import arrow from "../Images/arrow.png";
 import Rate from "./Rate";
-
+import arrow_slider from "../Images/arrow-slider.png";
 import Collapse from "./Collapse";
 function Appartement() {
   const { id } = useParams();
@@ -81,7 +81,7 @@ function Appartement() {
             >
               <img
                 className="appartement__slider__arrow-left__left"
-                src={arrow}
+                src={arrow_slider}
                 alt="Arrow"
               />
             </button>
@@ -91,7 +91,7 @@ function Appartement() {
             >
               <img
                 className="appartement__slider__arrow-right__right"
-                src={arrow}
+                src={arrow_slider}
                 alt="Arrow"
               />
             </button>
@@ -116,28 +116,36 @@ function Appartement() {
             <div className="profil__rate">
               <Rate score={logement.rating} />
             </div>
-            <div className="profil__name">
-              {logement.host.name.split(" ").map((part, index) => (
-                <p className="profil__name__p" key={index}>
-                  {part}
-                </p>
-              ))}
+            <div className="profil__content">
+              <div className="profil__content__name">
+                {logement.host.name.split(" ").map((part, index) => (
+                  <p className="profil__content__name__p" key={index}>
+                    {part}
+                  </p>
+                ))}
+              </div>
+
+              <img
+                src={logement.host.picture}
+                className="profil__content__img"
+                alt={logement.host.name}
+              />
             </div>
-            <img
-              src={logement.host.picture}
-              className="profil__img"
-              alt={logement.host.name}
+          </div>
+          <div className="collapse">
+            <Collapse
+              aboutTitle="Description"
+              aboutText={logement.description}
+            />
+            <Collapse
+              aboutTitle="Équipements"
+              aboutText={logement.equipments.map((equipment, index) => (
+                <li key={index} className="collapse__equipments-item">
+                  {equipment}
+                </li>
+              ))}
             />
           </div>
-          <Collapse aboutTitle="Description" aboutText={logement.description} />
-          <Collapse
-            aboutTitle="Équipements"
-            aboutText={logement.equipments.map((equipment, index) => (
-              <li key={index} className="collapse__equipments-item">
-                {equipment}
-              </li>
-            ))}
-          />
         </div>
       </section>
       <Footer />

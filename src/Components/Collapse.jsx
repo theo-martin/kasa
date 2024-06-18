@@ -10,27 +10,33 @@ export default function Collapse(props) {
 
   return (
     <button className="collapse__button" onClick={toggleState}>
-      <img
-        className={
-          toggle
-            ? "collapse__arrow collapse__arrow-down"
-            : "collapse__arrow collapse__arrow-up"
-        }
-        src={arrow}
-        alt="Arrow"
-      />
-      <h3> {props.aboutTitle}</h3>
-
-      <p
-        ref={contentRef}
-        className={
-          toggle
-            ? "collapse__content collapse__content-animation"
-            : "collapse__content"
-        }
-      >
-        {props.aboutText}
-      </p>
+      <div className="collapse__button__container-title">
+        <img
+          className={
+            toggle
+              ? "collapse__arrow collapse__arrow-down"
+              : "collapse__arrow collapse__arrow-up"
+          }
+          src={arrow}
+          alt="Arrow"
+        />
+        <h3 className="collapse__button__container-title__h3">
+          {" "}
+          {props.aboutTitle}
+        </h3>
+      </div>
+      <div className="collapse__text-container">
+        <p
+          ref={contentRef}
+          className={
+            toggle
+              ? "collapse__text-container__content collapse__text-container__content-animation"
+              : "collapse__text-container__content"
+          }
+        >
+          {props.aboutText}
+        </p>
+      </div>
     </button>
   );
 }
