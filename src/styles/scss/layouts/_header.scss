@@ -23,8 +23,10 @@
       }
     }
   }
-  // @media (min-width: 768px) {
-  // }
-  // @media (min-width: 1024px) {
-  // }
+  @media (min-width: 768px) {
+    margin: 50px 50px 50px 50px;
+  }
+  @media (min-width: 1024px) {
+    margin: 50px 100px 50px 100px;
+  }
 }

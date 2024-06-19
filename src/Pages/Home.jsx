@@ -22,7 +22,7 @@ export default function Home() {
 
   return (
     <>
-      <Header />
+      <Header linkhome="underline" />
       <main>
         <Banniere
           sectionbanner="banner"

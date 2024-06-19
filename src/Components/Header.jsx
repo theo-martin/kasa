@@ -1,5 +1,5 @@
 import ImageHeader from "../Images/LOGO.png";
-export default function Header() {
+export default function Header(props) {
   return (
     <>
       <header className="Header">
@@ -7,10 +7,14 @@ export default function Header() {
         <nav>
           <ul>
             <li>
-              <a href="/">ACCUEIL</a>
+              <a className={props.linkhome} href="/">
+                ACCUEIL
+              </a>
             </li>
             <li>
-              <a href="/about">A PROPOS</a>
+              <a className={props.linkabout} href="/about">
+                A PROPOS
+              </a>
             </li>
           </ul>
         </nav>

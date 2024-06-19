@@ -1,5 +1,30 @@
-.main-About {
+.page-about {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  justify-content: space-between;
+  @media (min-width: 768px) {
+    min-height: 100vh;
+  }
+}
+.main-about {
   display: flex;
   flex-direction: column;
   gap: 20px;
+  @media (min-width: 768px) {
+    gap: 38px;
+  }
+  @media (min-width: 1024px) {
+  }
+}
+.collapse {
+  &--about {
+    @media (min-width: 768px) {
+      gap: 30px;
+      margin: 0 50px;
+    }
+    @media (min-width: 1024px) {
+      margin: 0 100px;
+    }
+  }
 }

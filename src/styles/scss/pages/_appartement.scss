@@ -1,7 +1,12 @@
+.page-appartement {
+  height: 100vh;
+  display: flex;
+  justify-content: space-between;
+  flex-direction: column;
+}
 .appartement {
   display: flex;
   flex-direction: column;
-  align-items: center;
   margin: 27px 20px 27px 20px;
 
   &__slider {
@@ -14,6 +19,7 @@
       object-fit: cover;
     }
     &__arrow {
+      cursor: pointer;
       background-color: transparent;
       border: none;
     }
@@ -35,34 +41,58 @@
       }
     }
   }
-  &__content {
-    &__title {
-      color: $rouge-kasa;
-      font-weight: 500;
-      font-size: 18px;
-    }
-    &__location {
-      font-weight: 500;
-      font-size: 14px;
-      margin: 5px 0 10px 0;
-    }
-    &__tags-list {
-      display: flex;
-      flex-direction: row;
-      gap: 10px;
-      list-style-type: none;
-      &__tag-item {
-        width: fit-content;
-        padding: 5px;
-        font-size: 10px;
-        color: white;
-        font-weight: bold;
-        background-color: #ff6060;
-        border-radius: 5px;
+
+  &__content-container {
+    width: 100%;
+    &__content {
+      &__text {
+        &__title {
+          color: $rouge-kasa;
+          font-weight: 500;
+          font-size: 18px;
+        }
+        &__location {
+          font-weight: 500;
+          font-size: 14px;
+          margin: 5px 0 10px 0;
+        }
+        &__tags-list {
+          display: flex;
+          flex-direction: row;
+          gap: 10px;
+          list-style-type: none;
+          &__tag-item {
+            width: fit-content;
+            padding: 5px;
+            font-size: 10px;
+            color: white;
+            font-weight: bold;
+            background-color: #ff6060;
+            border-radius: 5px;
+          }
+        }
       }
     }
   }
+  @media (min-width: 768px) {
+    &__content-container {
+      display: flex;
+      gap: 20px;
+      flex-direction: column;
+      &__content {
+        display: flex;
+        justify-content: space-between;
+        // &__text {
+        // }
+      }
+    }
+    margin: 0px 50px 75px 50px;
+  }
+  @media (min-width: 1024px) {
+    margin: 0 100px 75px 100px;
+  }
 }
+
 .profil {
   display: flex;
   justify-content: space-between;
@@ -70,9 +100,6 @@
   &__rate {
     display: flex;
     gap: 5px;
-    // &__star {
-    //   height: 18px;
-    // }
   }
   &__content {
     margin: 16px 0 12px 0;
@@ -87,6 +114,18 @@
     &__img {
       border-radius: 90px;
       height: 32px;
+    }
+  }
+  @media (min-width: 768px) {
+    display: flex;
+    flex-direction: column-reverse;
+  }
+}
+.collapse {
+  @media (min-width: 768px) {
+    &--appartement {
+      display: flex;
+      flex-direction: row;
     }
   }
 }

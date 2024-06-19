@@ -5,11 +5,11 @@ import Banniere from "../Components/Banniere";
 import bg from "../Images/Banniere2.png";
 export default function About() {
   return (
-    <>
-      <Header />
-      <main className="main-About">
+    <div className="page-about">
+      <Header linkabout="underline" />
+      <main className="main-about">
         <Banniere sectionbanner="banner banner--opacity-about" bg={bg} />
-        <section className="collapse">
+        <section className="collapse collapse--about">
           <Collapse
             aboutTitle="Fiabilité"
             aboutText="Les annonces postées sur Kasa garantissent une fiabilité totale. Les photos sont conformes aux logements, et toutes les informations sont régulièrement vérifiées par nos équipes."
@@ -30,6 +30,6 @@ export default function About() {
       </main>
 
       <Footer />
-    </>
+    </div>
   );
 }

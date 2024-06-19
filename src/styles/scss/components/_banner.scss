@@ -48,4 +48,10 @@
     font-weight: bold;
     flex-direction: column;
   }
+  @media (min-width: 768px) {
+    height: 223px;
+  }
+  // @media (min-width: 1024px) {
+
+  // }
 }

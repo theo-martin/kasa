@@ -19,4 +19,15 @@
     margin: 113px 0 113px 0;
     text-decoration: underline;
   }
+  @media (min-width: 768px) {
+  }
+  @media (min-width: 1024px) {
+    &__img {
+      height: 263px;
+      width: 597px;
+    }
+    &__p {
+      flex-direction: row;
+    }
+  }
 }

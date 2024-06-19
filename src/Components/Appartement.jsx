@@ -65,7 +65,7 @@ function Appartement() {
   return (
     <div className="page-appartement">
       <Header />
-      <section className="appartement">
+      <main className="appartement">
         {/* Slider (uniquement si logement.pictures existe) */}
         {logement.pictures && (
           <div className="appartement__slider">
@@ -97,42 +97,50 @@ function Appartement() {
             </button>
           </div>
         )}
-        <div className="appartement__content">
-          <h2 className="appartement__content__title">{logement.title}</h2>
-          <h3 className="appartement__content__location">
-            {logement.location}
-          </h3>
-          <ul className="appartement__content__tags-list">
-            {logement.tags.map((tag, index) => (
-              <li
-                key={index}
-                className="appartement__content__tags-list__tag-item"
-              >
-                {tag}
-              </li>
-            ))}
-          </ul>
-          <div className="profil">
-            <div className="profil__rate">
-              <Rate score={logement.rating} />
-            </div>
-            <div className="profil__content">
-              <div className="profil__content__name">
-                {logement.host.name.split(" ").map((part, index) => (
-                  <p className="profil__content__name__p" key={index}>
-                    {part}
-                  </p>
-                ))}
-              </div>
 
-              <img
-                src={logement.host.picture}
-                className="profil__content__img"
-                alt={logement.host.name}
-              />
+        <div className="appartement__content-container">
+          <div className="appartement__content-container__content">
+            <div className="appartement__content-container__content__text">
+              <h2 className="appartement__content-container__content__text__title">
+                {logement.title}
+              </h2>
+              <h3 className="appartement__content-container__content__text__location">
+                {logement.location}
+              </h3>
+              <ul className="appartement__content-container__content__text__tags-list">
+                {logement.tags.map((tag, index) => (
+                  <li
+                    key={index}
+                    className="appartement__content-container__content__text__tags-list__tag-item"
+                  >
+                    {tag}
+                  </li>
+                ))}
+              </ul>
+            </div>
+            <div className="profil">
+              <div className="profil__rate">
+                <Rate score={logement.rating} />
+              </div>
+              <div className="profil__content">
+                <div className="profil__content__name">
+                  {logement.host.name.split(" ").map((part, index) => (
+                    <p className="profil__content__name__p" key={index}>
+                      {part}
+                    </p>
+                  ))}
+                </div>
+
+                <img
+                  src={logement.host.picture}
+                  className="profil__content__img"
+                  alt={logement.host.name}
+                />
+              </div>
             </div>
           </div>
-          <div className="collapse">
+
+          <div className="collapse collapse--appartement">
             <Collapse
               aboutTitle="Description"
               aboutText={logement.description}
@@ -147,7 +155,7 @@ function Appartement() {
             />
           </div>
         </div>
-      </section>
+      </main>
       <Footer />
     </div>
   );
